@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YOLOv8 Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div class="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
+
+    <h1 class="text-2xl font-bold mb-6 text-center">YOLOv8 Door Detection</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-4">
+      <input type="file" name="image" required class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+        file:rounded file:border-0 file:text-sm file:font-semibold
+        file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+
+      <label for="box_color" class="block font-medium">Choose box color:</label>
+      <select name="box_color" id="box_color" class="w-full border border-gray-300 rounded px-3 py-2">
+        <option value="red" {% if selected_color == 'red' %}selected{% endif %}>Red</option>
+        <option value="green" {% if selected_color == 'green' %}selected{% endif %}>Green</option>
+        <option value="blue" {% if selected_color == 'blue' %}selected{% endif %}>Blue</option>
+        <option value="yellow" {% if selected_color == 'yellow' %}selected{% endif %}>Yellow</option>
+        <option value="magenta" {% if selected_color == 'magenta' %}selected{% endif %}>Magenta</option>
+        <option value="cyan" {% if selected_color == 'cyan' %}selected{% endif %}>Cyan</option>
+        <option value="white" {% if selected_color == 'white' %}selected{% endif %}>White</option>
+      </select>
+
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded w-full">
+        Run Detection
+      </button>
+    </form>
+
+    {% if detection_message %}
+      <p class="mt-6 text-lg font-semibold text-center text-green-600">{{ detection_message }}</p>
+    {% endif %}
+
+    {% if result_image %}
+      <h2 class="mt-6 text-xl font-semibold text-center">Detection Result</h2>
+      <img src="{{ url_for('static', filename='uploads/' + result_image) }}" class="mt-4 mx-auto rounded shadow">
+      <div class="mt-4 text-center">
+        <a href="{{ url_for('static', filename='uploads/' + result_image) }}"
+          download="{{ result_image }}"
+          class="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded mt-4">
+          ⬇️ Download Result
+        </a>
+      </div>
+    {% endif %}
+
+  </div>
+</body>
+
+</html>

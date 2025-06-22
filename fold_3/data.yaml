@@ -1,0 +1,5 @@
+names:
+- door
+nc: 1
+train: c:\Users\Ned\Desktop\Pictures\fold_3\images\train
+val: c:\Users\Ned\Desktop\Pictures\fold_3\images\val
